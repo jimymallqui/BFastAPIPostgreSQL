@@ -15,7 +15,7 @@ import os
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
 from fastapi import Request
-
+from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
 @app.exception_handler(RequestValidationError)
@@ -242,6 +242,8 @@ def crear_usuario_por_defecto():
         print("✅ Usuario admin@example.com creado.")
     db.close()
 
+
+app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
 
 if __name__ == "__main__":
     import uvicorn
