@@ -231,7 +231,7 @@ def crear_usuario_por_defecto():
         db.commit()
         print("✅ Usuario admin@example.com creado.")
 
-    if not db.query(User).filter(User.email == "conductor@jht.comconductor@jht.com").first():
+    if not db.query(User).filter(User.email == "conductor@jht.com").first():
         nuevo = User(
             email="conductor@jht.com",
             hashed_password=get_password_hash("demo123"),
