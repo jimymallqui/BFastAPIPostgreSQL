@@ -216,6 +216,32 @@ def list_tables(db: Session = Depends(get_db)):
 def listar_usuarios(db: Session = Depends(get_db)):
     return db.query(User).all()
 
+from auth import get_password_hash
+
+@app.on_event("startup")
+def crear_usuario_por_defecto():
+    db = SessionLocal()
+    if not db.query(User).filter(User.email == "admin@example.com").first():
+        nuevo = User(
+            email="admin@example.com",
+            hashed_password=get_password_hash("admin123"),
+            role="admin"
+        )
+        db.add(nuevo)
+        db.commit()
+        print("✅ Usuario admin@example.com creado.")
+
+    if not db.query(User).filter(User.email == "admin@example.com").first():
+        nuevo = User(
+            email="conductor@jht.com",
+            hashed_password=get_password_hash("demo123"),
+            role="conductor"
+        )
+        db.add(nuevo)
+        db.commit()
+        print("✅ Usuario admin@example.com creado.")
+    db.close()
+
 
 if __name__ == "__main__":
     import uvicorn
