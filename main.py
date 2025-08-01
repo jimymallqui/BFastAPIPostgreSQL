@@ -243,6 +243,7 @@ def crear_usuario_por_defecto():
     db.close()
 
 
+os.makedirs("uploads", exist_ok=True)
 app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
 
 if __name__ == "__main__":
