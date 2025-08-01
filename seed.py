@@ -91,7 +91,7 @@ print("✅ Base de datos precargada con éxito.")
 #curl -X POST http://localhost:8000/login -H "accept: application/json" -H "Content-Type: application/json" -d "{\"email\": \"admin@jht.com\", \"password\": \"admin123\"}"
 #curl -X POST http://localhost:8000/login -H "Content-Type: application/x-www-form-urlencoded" -d "username=admin@jht.com&password=admin123"
 #cd proyecto2/backend
-
+# https://bfastapipostgresql.onrender.com/docs
 
 # proyecto2\backend
 

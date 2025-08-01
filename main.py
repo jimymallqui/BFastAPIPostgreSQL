@@ -90,6 +90,14 @@ def get_colaboradores(user: User = Depends(get_current_user), db: Session = Depe
         raise HTTPException(status_code=403, detail="No autorizado")
     return db.query(Colaborador).all()
 
+@app.get("/users/me")
+def read_users_me(current_user: User = Depends(get_current_user)):
+    return {
+        "id": current_user.id,
+        "username": current_user.email,
+        "role": current_user.role
+    }
+
 @app.post("/actividad/")
 def create_actividad(
     actividad: str = Form(...),
