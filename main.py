@@ -1,6 +1,6 @@
 # main.py (actualizado)
 from datetime import datetime
-
+from sqlalchemy import inspect
 from fastapi import FastAPI, Depends, HTTPException, File, UploadFile, Form
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordRequestForm
@@ -206,6 +206,16 @@ def crear_actividad(
     db.commit()
     db.refresh(actividad_obj)
     return {"msg": "Actividad registrada", "id": actividad_obj.id}
+
+@app.get("/debug/tables")
+def list_tables(db: Session = Depends(get_db)):
+    inspector = inspect(db.bind)
+    return inspector.get_table_names()
+
+@app.get("/debug/usuarios")
+def listar_usuarios(db: Session = Depends(get_db)):
+    return db.query(User).all()
+
 
 if __name__ == "__main__":
     import uvicorn
